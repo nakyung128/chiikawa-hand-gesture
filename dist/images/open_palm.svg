@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#0d0d1a" rx="16"/>
+  <!-- 손바닥 -->
+  <rect x="60" y="120" width="80" height="58" rx="18" fill="#d4a574"/>
+  <!-- 엄지 (왼쪽으로 약간 기울어짐) -->
+  <rect x="30" y="88" width="22" height="55" rx="11" fill="#d4a574" transform="rotate(-18,41,115)"/>
+  <!-- 검지 -->
+  <rect x="64" y="45" width="18" height="80" rx="9" fill="#d4a574"/>
+  <!-- 중지 (가장 길게) -->
+  <rect x="86" y="36" width="18" height="89" rx="9" fill="#d4a574"/>
+  <!-- 약지 -->
+  <rect x="108" y="45" width="18" height="80" rx="9" fill="#d4a574"/>
+  <!-- 새끼 (가장 짧게) -->
+  <rect x="128" y="62" width="16" height="63" rx="8" fill="#d4a574"/>
+  <!-- 손가락 마디 강조선 -->
+  <line x1="64" y1="85" x2="82" y2="85" stroke="#c09060" stroke-width="1.5" opacity="0.5"/>
+  <line x1="86" y1="80" x2="104" y2="80" stroke="#c09060" stroke-width="1.5" opacity="0.5"/>
+  <line x1="108" y1="85" x2="126" y2="85" stroke="#c09060" stroke-width="1.5" opacity="0.5"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#0d0d1a" rx="16"/>
+  <!-- 주먹 부분 -->
+  <rect x="58" y="105" width="84" height="68" rx="18" fill="#d4a574"/>
+  <!-- 주먹 손가락 마디 -->
+  <rect x="58" y="105" width="84" height="20" rx="10" fill="#c8956a"/>
+  <!-- 엄지 (위로 세움) -->
+  <rect x="72" y="36" width="22" height="78" rx="11" fill="#d4a574"/>
+  <!-- 엄지 끝 강조 -->
+  <ellipse cx="83" cy="39" rx="11" ry="9" fill="#e0b890"/>
+  <!-- 엄지 마디선 -->
+  <line x1="72" y1="78" x2="94" y2="78" stroke="#b8855a" stroke-width="1.5" opacity="0.5"/>
+  <line x1="72" y1="95" x2="94" y2="95" stroke="#b8855a" stroke-width="1.5" opacity="0.5"/>
+  <!-- 손가락 선 -->
+  <line x1="80" y1="106" x2="80" y2="125" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+  <line x1="100" y1="106" x2="100" y2="125" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+  <line x1="120" y1="106" x2="120" y2="125" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+</svg>

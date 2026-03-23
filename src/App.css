@@ -1,0 +1,433 @@
+/* ─────────────────────────────────────────────────────────────
+   App.css — Hand Gesture Matcher
+   Dark theme, two-panel layout
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base:       #0d0d1a;
+  --bg-panel:      #13132a;
+  --bg-card:       #1a1a35;
+  --bg-card-hover: #22224a;
+  --border:        #2a2a55;
+  --accent:        #00e5a0;
+  --accent-dim:    #00b37a;
+  --accent-glow:   rgba(0, 229, 160, 0.15);
+  --red:           #ff4466;
+  --gold:          #ffd700;
+  --silver:        #c0c0c0;
+  --bronze:        #cd7f32;
+  --text-primary:  #e8e8f5;
+  --text-secondary:#8888aa;
+  --text-muted:    #55557a;
+  --radius:        12px;
+  --radius-sm:     8px;
+  --shadow:        0 4px 24px rgba(0,0,0,0.4);
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── App Layout ── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #1a0a3e 0%, #0d0d1a 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-content h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+
+.header-content p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 20px;
+  padding: 20px 32px;
+  flex: 1;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.app-footer {
+  padding: 12px 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* ── Panel Header (shared) ── */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.panel-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Status Badge ── */
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.status-badge.detected {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.status-badge.detected .status-dot {
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.status-badge.waiting {
+  color: var(--text-secondary);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Webcam Panel ── */
+.webcam-container {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.webcam-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+/* 거울 효과: CSS scaleX(-1)으로 셀피 모드 구현 */
+.webcam-video,
+.webcam-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* 좌우 반전 (셀피 거울 효과) */
+}
+
+.webcam-canvas {
+  /* canvas는 video 위에 오버레이 */
+  background: transparent;
+}
+
+.webcam-hint {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Overlay (loading / error) ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(13, 13, 26, 0.92);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.overlay small {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.overlay-error {
+  color: var(--red);
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Result Panel ── */
+.result-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-count {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.result-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.result-footer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  filter: grayscale(0.5);
+}
+
+.empty-state p {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.empty-state small {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ── Image Card ── */
+.image-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  display: grid;
+  grid-template-columns: auto 80px 1fr;
+  gap: 12px;
+  align-items: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.image-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateX(3px);
+}
+
+.image-card--top {
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.card-rank {
+  display: flex;
+  align-items: center;
+}
+
+.rank-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rank-1 { color: var(--gold); }
+.rank-2 { color: var(--silver); }
+.rank-3 { color: var(--bronze); }
+
+.card-image-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #0a0a18;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 치이카와 캐릭터 이미지가 꽉 차게 표시 */
+  border-radius: var(--radius-sm);
+}
+
+.card-emoji {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 1rem;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.card-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Similarity Bar ── */
+.similarity-section {
+  margin-top: 6px;
+}
+
+.similarity-bar-bg {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.similarity-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.image-card--top .similarity-bar-fill {
+  background: linear-gradient(90deg, #00c88a, #00ffb3);
+  box-shadow: 0 0 8px rgba(0,255,179,0.5);
+}
+
+.similarity-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.similarity-score {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.similarity-dist {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .app-main {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .image-card {
+    grid-template-columns: auto 64px 1fr;
+  }
+
+  .card-image-wrapper {
+    width: 64px;
+    height: 64px;
+  }
+}

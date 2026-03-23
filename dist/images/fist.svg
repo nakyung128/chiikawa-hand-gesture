@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#0d0d1a" rx="16"/>
+  <!-- 주먹 (손가락이 안쪽으로 말린 형태) -->
+  <rect x="55" y="85" width="90" height="85" rx="20" fill="#d4a574"/>
+  <!-- 손가락 주름 표현 -->
+  <rect x="55" y="85" width="90" height="22" rx="11" fill="#c8956a"/>
+  <!-- 엄지 (옆으로) -->
+  <rect x="32" y="100" width="42" height="22" rx="11" fill="#d4a574" transform="rotate(-10,53,111)"/>
+  <!-- 손가락 마디 선 -->
+  <line x1="72" y1="86" x2="72" y2="107" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+  <line x1="95" y1="86" x2="95" y2="107" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+  <line x1="118" y1="86" x2="118" y2="107" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+</svg>

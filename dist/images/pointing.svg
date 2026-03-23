@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#0d0d1a" rx="16"/>
+  <!-- 손바닥 + 굽힌 손가락들 -->
+  <rect x="58" y="105" width="84" height="68" rx="18" fill="#d4a574"/>
+  <!-- 주먹 윗면 (굽힌 손가락) -->
+  <rect x="58" y="105" width="84" height="22" rx="11" fill="#c8956a"/>
+  <!-- 엄지 (옆) -->
+  <ellipse cx="50" cy="115" rx="16" ry="14" fill="#d4a574"/>
+  <!-- 검지 (위로 세움) -->
+  <rect x="70" y="36" width="20" height="78" rx="10" fill="#d4a574"/>
+  <!-- 검지 끝 강조 -->
+  <ellipse cx="80" cy="39" rx="10" ry="8" fill="#e0b890"/>
+  <!-- 검지 마디선 -->
+  <line x1="70" y1="78" x2="90" y2="78" stroke="#b8855a" stroke-width="1.5" opacity="0.5"/>
+  <line x1="70" y1="93" x2="90" y2="93" stroke="#b8855a" stroke-width="1.5" opacity="0.5"/>
+  <!-- 다른 손가락 선 -->
+  <line x1="100" y1="106" x2="100" y2="127" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+  <line x1="118" y1="106" x2="118" y2="127" stroke="#b8855a" stroke-width="1.5" opacity="0.6"/>
+  <!-- 방향 화살표 -->
+  <path d="M95 50 L108 50 L103 44 M108 50 L103 56" stroke="#00e5a0" stroke-width="2" fill="none" opacity="0.7"/>
+</svg>
