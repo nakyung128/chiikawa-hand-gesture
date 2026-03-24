@@ -1,15 +1,11 @@
-/**
- * ImageCard Component
- * 매칭된 제스처 하나를 카드 형태로 표시합니다.
- * 유사도 점수, 순위 배지, 프로그레스 바를 포함합니다.
- */
 import React from 'react';
 
 export default function ImageCard({ gesture, score, distance, rank }) {
   const percentage = Math.round(score * 100);
-  const isTop = rank === 1;
+  const characterClass = gesture.character ? `image-card--${gesture.character}` : '';
 
-  // 이미지 로드 실패 시 SVG fallback으로 전환
+  const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : '🥉';
+
   const handleImgError = (e) => {
     if (gesture.fallbackPath && e.target.src !== window.location.origin + gesture.fallbackPath) {
       e.target.src = gesture.fallbackPath;
@@ -17,16 +13,10 @@ export default function ImageCard({ gesture, score, distance, rank }) {
   };
 
   return (
-    <div className={`image-card ${isTop ? 'image-card--top' : ''}`}>
-      {/* 순위 배지 */}
-      <div className="card-rank">
-        <span className={`rank-badge rank-${rank}`}>
-          {rank === 1 ? '🏆 Best' : rank === 2 ? '🥈 2nd' : '🥉 3rd'}
-        </span>
-      </div>
-
+    <div className={`image-card ${characterClass}`}>
       {/* 제스처 이미지 */}
       <div className="card-image-wrapper">
+        <span className="rank-overlay">{rankEmoji}</span>
         <img
           src={gesture.imagePath}
           alt={gesture.name}
@@ -50,8 +40,8 @@ export default function ImageCard({ gesture, score, distance, rank }) {
             />
           </div>
           <div className="similarity-labels">
-            <span className="similarity-score">{percentage}% 유사</span>
-            <span className="similarity-dist">거리: {distance.toFixed(2)}</span>
+            <span className="similarity-score">💕 {percentage}% 닮았어요</span>
+            <span className="similarity-dist">거리 {distance.toFixed(2)}</span>
           </div>
         </div>
       </div>

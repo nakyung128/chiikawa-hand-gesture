@@ -32,13 +32,13 @@ export async function initHandTracker(numHands = 1) {
   const handLandmarker = await HandLandmarker.createFromOptions(vision, {
     baseOptions: {
       modelAssetPath: MODEL_PATH,
-      delegate: 'GPU', // GPU 가속 (GPU 없으면 자동으로 CPU fallback)
+      delegate: 'CPU', // CPU 모드 (WebGL 미지원 환경 호환)
     },
     runningMode: 'VIDEO',
     numHands,
-    minHandDetectionConfidence: 0.5,
-    minHandPresenceConfidence: 0.5,
-    minTrackingConfidence: 0.5,
+    minHandDetectionConfidence: 0.3,
+    minHandPresenceConfidence: 0.3,
+    minTrackingConfidence: 0.3,
   });
 
   return handLandmarker;

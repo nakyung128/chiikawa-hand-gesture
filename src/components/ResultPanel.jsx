@@ -10,10 +10,7 @@ export default function ResultPanel({ matches, isHandDetected }) {
     <div className="result-panel">
       {/* 헤더 */}
       <div className="panel-header">
-        <h2>유사한 제스처</h2>
-        {matches.length > 0 && (
-          <span className="result-count">Top {matches.length}</span>
-        )}
+        <h2>🔍 비슷한 제스처</h2>
       </div>
 
       {/* 콘텐츠 영역 */}
@@ -21,15 +18,15 @@ export default function ResultPanel({ matches, isHandDetected }) {
         {!isHandDetected ? (
           /* 손 미감지 상태 */
           <div className="empty-state">
-            <div className="empty-icon">👋</div>
-            <p>손을 카메라에 보여주세요</p>
-            <small>손이 감지되면 유사한 제스처를 찾아드립니다</small>
+            <div className="empty-icon">🐾</div>
+            <p>손을 카메라에 보여줘요!</p>
+            <small>손이 감지되면 닮은 치이카와를 찾아줄게요 ✨</small>
           </div>
         ) : matches.length === 0 ? (
           /* 분석 중 */
           <div className="empty-state">
-            <div className="empty-icon">🔍</div>
-            <p>분석 중…</p>
+            <div className="empty-icon">🌟</div>
+            <p>찾고 있어요…</p>
           </div>
         ) : (
           /* 결과 카드 목록 */
@@ -50,7 +47,7 @@ export default function ResultPanel({ matches, isHandDetected }) {
       {/* 하단 설명 */}
       <div className="result-footer">
         <small>
-          유사도 계산: Euclidean Distance on 42-dim normalized landmark vectors
+          ✨ 42차원 랜드마크 벡터 유클리드 거리로 유사도를 계산해요
         </small>
       </div>
     </div>

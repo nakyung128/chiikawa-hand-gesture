@@ -61,7 +61,7 @@ export function euclideanDistance(a, b) {
  *                            값이 클수록 점수 차이가 완만해짐
  * @returns {number} 0 ~ 1 (1 = 완전 동일)
  */
-export function distanceToScore(distance, scale = 2.5) {
+export function distanceToScore(distance, scale = 5.0) {
   return Math.exp(-distance / scale);
 }
 

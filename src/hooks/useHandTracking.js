@@ -24,6 +24,7 @@ export function useHandTracking() {
   const handLandmarkerRef = useRef(null);
   const animFrameRef      = useRef(null);
   const isRunningRef      = useRef(false);
+  const detectErrorRef    = useRef(false);
 
   const [isLoading,     setIsLoading]     = useState(true);
   const [error,         setError]         = useState(null);
@@ -46,26 +47,35 @@ export function useHandTracking() {
       return;
     }
 
-    // ── 손 감지 실행 ──
-    const results = detectHands(landmarker, video);
+    try {
+      // ── 손 감지 실행 ──
+      const results = detectHands(landmarker, video);
 
-    // ── 캔버스 설정 및 초기화 ──
-    const ctx = canvas.getContext('2d');
-    canvas.width  = video.videoWidth;
-    canvas.height = video.videoHeight;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // ── 캔버스 설정 및 초기화 ──
+      const ctx = canvas.getContext('2d');
+      canvas.width  = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (results.landmarks && results.landmarks.length > 0) {
-      // 손이 감지된 경우: 랜드마크 그리기 + 특징 벡터 추출
-      drawHandOnCanvas(ctx, results.landmarks[0], canvas.width, canvas.height);
+      if (results.landmarks && results.landmarks.length > 0) {
+        // 감지된 모든 손 그리기 (최대 2개)
+        for (const landmarks of results.landmarks) {
+          drawHandOnCanvas(ctx, landmarks, canvas.width, canvas.height);
+        }
 
-      const vector = extractFeaturesFromResults(results);
-      setFeatureVector(vector);
-      setIsHandDetected(true);
-    } else {
-      // 손이 없는 경우: 상태 초기화
-      setFeatureVector(null);
-      setIsHandDetected(false);
+        const vector = extractFeaturesFromResults(results);
+        setFeatureVector(vector);
+        setIsHandDetected(true);
+      } else {
+        // 손이 없는 경우: 상태 초기화
+        setFeatureVector(null);
+        setIsHandDetected(false);
+      }
+    } catch (err) {
+      if (!detectErrorRef.current) {
+        detectErrorRef.current = true;
+        setError(`감지 오류: ${err?.message ?? String(err)}`);
+      }
     }
 
     animFrameRef.current = requestAnimationFrame(detect);
@@ -83,7 +93,7 @@ export function useHandTracking() {
         setError(null);
 
         // 1) MediaPipe HandLandmarker 초기화 (CDN에서 WASM 다운로드)
-        handLandmarkerRef.current = await initHandTracker(1);
+        handLandmarkerRef.current = await initHandTracker(2);
 
         // 2) 웹캠 시작
         if (videoRef.current) {

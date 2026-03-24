@@ -16,10 +16,10 @@ export default function WebcamView({
     <div className="webcam-container">
       {/* 헤더 */}
       <div className="panel-header">
-        <h2>웹캠 입력</h2>
+        <h2>📸 카메라</h2>
         <span className={`status-badge ${isHandDetected ? 'detected' : 'waiting'}`}>
           <span className="status-dot" />
-          {isHandDetected ? '손 감지됨' : '손을 올려주세요'}
+          {isHandDetected ? '✨ 손 감지됨!' : '🖐️ 손을 보여줘요'}
         </span>
       </div>
 
@@ -29,17 +29,17 @@ export default function WebcamView({
         {isLoading && (
           <div className="overlay">
             <div className="spinner" />
-            <p>MediaPipe 초기화 중…</p>
-            <small>최초 실행 시 모델을 다운로드합니다</small>
+            <p>🐾 잠깐만요, 준비 중이에요…</p>
+            <small>처음 실행할 때 모델을 다운로드해요</small>
           </div>
         )}
 
         {/* 에러 오버레이 */}
         {error && (
           <div className="overlay overlay-error">
-            <p>⚠️ 오류 발생</p>
+            <p>😢 앗, 오류가 났어요</p>
             <small>{error}</small>
-            <small>카메라 권한을 확인해 주세요</small>
+            <small>카메라 권한을 확인해 주세요 🙏</small>
           </div>
         )}
 
@@ -63,7 +63,7 @@ export default function WebcamView({
 
       {/* 힌트 */}
       <p className="webcam-hint">
-        카메라에 손을 가까이 대고 명확하게 제스처를 만들어 보세요
+        💡 손을 카메라 가까이 대고 제스처를 만들어 봐요!
       </p>
     </div>
   );

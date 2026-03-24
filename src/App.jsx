@@ -54,8 +54,8 @@ export default function App() {
       {/* 헤더 */}
       <header className="app-header">
         <div className="header-content">
-          <h1>✋ Hand Gesture Matcher</h1>
-          <p>실시간 손 모양 유사도 검색 — MediaPipe Hands + Landmark Similarity</p>
+          <h1>🐾 치이카와 제스처 매처</h1>
+          <p>✨ 손 모양을 카메라에 보여주면 닮은 치이카와를 찾아줘요!</p>
         </div>
       </header>
 
@@ -82,7 +82,7 @@ export default function App() {
       {/* 푸터 */}
       <footer className="app-footer">
         <small>
-          MediaPipe Hands · 21 Landmarks · Cosine + Euclidean Similarity
+          🌸 치이카와 · 우사기 · 하치와레 — MediaPipe Hands로 만든 손 모양 인식 앱 🌸
         </small>
       </footer>
     </div>
