@@ -69,15 +69,6 @@ const VECTORS = {
     B.pinkyMCP,  E.pinky.pip,  E.pinky.dip,  E.pinky.tip,
   ]),
 
-  // 주먹: 모든 손가락 굽힘
-  fist: flat([
-    B.wrist, B.thumbCMC, B.thumbMCP, C.thumb.ip, C.thumb.tip,
-    B.indexMCP,  C.index.pip,  C.index.dip,  C.index.tip,
-    B.middleMCP, C.middle.pip, C.middle.dip, C.middle.tip,
-    B.ringMCP,   C.ring.pip,   C.ring.dip,   C.ring.tip,
-    B.pinkyMCP,  C.pinky.pip,  C.pinky.dip,  C.pinky.tip,
-  ]),
-
   // 브이(피스): 검지 + 중지 펼침
   peace: flat([
     B.wrist, B.thumbCMC, B.thumbMCP, C.thumb.ip, C.thumb.tip,
@@ -126,24 +117,6 @@ const VECTORS = {
     B.pinkyMCP,  E.pinky.pip,  E.pinky.dip,  E.pinky.tip,
   ]),
 
-  // 세 손가락: 검지 + 중지 + 약지
-  three: flat([
-    B.wrist, B.thumbCMC, B.thumbMCP, C.thumb.ip, C.thumb.tip,
-    B.indexMCP,  E.index.pip,  E.index.dip,  E.index.tip,
-    B.middleMCP, E.middle.pip, E.middle.dip, E.middle.tip,
-    B.ringMCP,   E.ring.pip,   E.ring.dip,   E.ring.tip,
-    B.pinkyMCP,  C.pinky.pip,  C.pinky.dip,  C.pinky.tip,
-  ]),
-
-  // 네 손가락: 엄지 제외 4개
-  four: flat([
-    B.wrist, B.thumbCMC, B.thumbMCP, C.thumb.ip, C.thumb.tip,
-    B.indexMCP,  E.index.pip,  E.index.dip,  E.index.tip,
-    B.middleMCP, E.middle.pip, E.middle.dip, E.middle.tip,
-    B.ringMCP,   E.ring.pip,   E.ring.dip,   E.ring.tip,
-    B.pinkyMCP,  E.pinky.pip,  E.pinky.dip,  E.pinky.tip,
-  ]),
-
   // 핀치: 엄지+검지 끝이 맞닿고, 나머지 펼침
   pinch: flat([
     B.wrist, B.thumbCMC, B.thumbMCP,
@@ -166,16 +139,7 @@ export const gestureDatabase = [
     emoji: '🖐️',
     description: '손 흔들며 인사하는 우사기',
     imagePath: '/images/usagi_wave.jpg',
-    fallbackPath: '/images/open_palm.svg',
     vector: VECTORS.open_palm,
-  },
-  {
-    id: 'fist',
-    name: '주먹',
-    emoji: '✊',
-    description: '모든 손가락을 안으로 구부린 클로즈드 피스트',
-    imagePath: '/images/fist.svg',
-    vector: VECTORS.fist,
   },
   {
     id: 'peace',
@@ -183,7 +147,6 @@ export const gestureDatabase = [
     emoji: '✌️',
     description: '브이 포즈를 하고 있는 치이카와',
     imagePath: '/images/chiikawa_peace.jpg',
-    fallbackPath: '/images/peace.svg',
     vector: VECTORS.peace,
   },
   {
@@ -191,8 +154,7 @@ export const gestureDatabase = [
     name: '엄지 척',
     emoji: '👍',
     description: '딸기 모자 치이카와의 엄지 척',
-    imagePath: '/images/ichigo_thumbsup.jpg',
-    fallbackPath: '/images/thumbs_up.svg',
+    imagePath: '/images/chiikawa_thumbsup.jpg',
     vector: VECTORS.thumbs_up,
   },
   {
@@ -201,42 +163,23 @@ export const gestureDatabase = [
     emoji: '☝️',
     description: '눈을 가리키며 메롱하는 우사기',
     imagePath: '/images/usagi_meron.jpg',
-    fallbackPath: '/images/pointing.svg',
     vector: VECTORS.pointing,
   },
   {
-    id: 'ok',
-    name: 'OK 사인',
-    emoji: '👌',
+    id: 'peace',
+    name: '양손 브이 (피스)',
+    emoji: '✌️✌️',
     description: '양손으로 브이를 만든 하치와레',
     imagePath: '/images/hachiware_peace.jpg',
-    fallbackPath: '/images/ok.svg',
-    vector: VECTORS.ok,
+    vector: VECTORS.peace,
   },
   {
-    id: 'rock',
-    name: '로큰롤',
-    emoji: '🤘',
-    description: '반짝반짝 엄지척을 하는 하치와레',
+    id: 'thumbs_up_hachiware',
+    name: '엄지 척 (하치와레)',
+    emoji: '👍',
+    description: '엄지척을 하는 하치와레',
     imagePath: '/images/hachiware_thumbsup.jpg',
-    fallbackPath: '/images/rock.svg',
-    vector: VECTORS.rock,
-  },
-  {
-    id: 'three',
-    name: '세 손가락',
-    emoji: '🤟',
-    description: '검지·중지·약지 세 손가락을 펼친 숫자 3',
-    imagePath: '/images/three.svg',
-    vector: VECTORS.three,
-  },
-  {
-    id: 'four',
-    name: '네 손가락',
-    emoji: '🖖',
-    description: '엄지 제외 네 손가락을 펼친 숫자 4',
-    imagePath: '/images/four.svg',
-    vector: VECTORS.four,
+    vector: VECTORS.thumbs_up,
   },
   {
     id: 'pinch',
@@ -244,7 +187,30 @@ export const gestureDatabase = [
     emoji: '🤌',
     description: '볼에 양손 검지를 콕! 치이카와',
     imagePath: '/images/chiikawa_cheek.jpg',
-    fallbackPath: '/images/pinch.svg',
     vector: VECTORS.pinch,
+  },
+  {
+    id: 'pinch_hachiware',
+    name: '볼 콕 (하치와레)',
+    emoji: '🤌',
+    description: '볼에 손가락을 콕! 하치와레',
+    imagePath: '/images/hachiware_cheek.jpg',
+    vector: VECTORS.pinch,
+  },
+  {
+    id: 'open_palm_hachiware',
+    name: '손 흔들며 인사 (하치와레)',
+    emoji: '🖐️',
+    description: '한 손 들고 인사하는 하치와레',
+    imagePath: '/images/hachiware_wave.jpg',
+    vector: VECTORS.open_palm,
+  },
+  {
+    id: 'peace_usagi',
+    name: '양손 브이 (우사기)',
+    emoji: '✌️✌️',
+    description: '양손으로 브이를 만든 우사기',
+    imagePath: '/images/usagi_peace.jpg',
+    vector: VECTORS.peace,
   },
 ];
